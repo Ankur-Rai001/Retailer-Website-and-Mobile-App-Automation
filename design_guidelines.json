@@ -1,0 +1,138 @@
+{
+  "project_name": "ShopSwift India",
+  "design_philosophy": {
+    "identity": "E1: The Anti-AI Designer",
+    "core_concept": "The Digital Dukaan - Trustworthy, Accessible, Efficient",
+    "vibe": "Desi Trust meets Modern Efficiency. A digital bahi-khata (ledger) that feels like a superpower.",
+    "theme_strategy": "Light Mode Primary. High contrast for outdoor visibility. Dark mode available but secondary."
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Eczar, serif",
+      "body": "Manrope, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "google_fonts_import": "https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&family=Manrope:wght@200;300;400;500;600;700;800&display=swap",
+    "usage_rules": {
+      "headings": "Use 'Eczar' for all H1-H3. It gives a distinctive Indian heritage feel. Weight: 600 or 700.",
+      "body": "Use 'Manrope' for all body text and UI elements. Its digits are highly legible, crucial for pricing.",
+      "hero_text": "text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]",
+      "section_headers": "text-3xl md:text-4xl font-semibold tracking-tight text-slate-900"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#F97316",
+        "foreground": "#FFFFFF",
+        "description": "Digital Saffron - Energetic, auspicious, high visibility."
+      },
+      "secondary": {
+        "DEFAULT": "#0F172A",
+        "foreground": "#F8FAFC",
+        "description": "Ledger Ink - Trustworthy, deep slate for contrast."
+      },
+      "accent": {
+        "DEFAULT": "#10B981",
+        "foreground": "#FFFFFF",
+        "description": "Growth Green - For success states and financial positive indicators."
+      },
+      "background": {
+        "DEFAULT": "#F8FAFC",
+        "paper": "#FFFFFF",
+        "subtle": "#F1F5F9"
+      },
+      "muted": {
+        "DEFAULT": "#64748B",
+        "foreground": "#94A3B8"
+      }
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(180deg, rgba(255,255,255,0) 0%, #F8FAFC 100%)",
+      "brand_glow": "radial-gradient(circle at center, rgba(249, 115, 22, 0.15) 0%, rgba(255,255,255,0) 70%)"
+    }
+  },
+  "layout": {
+    "spacing_system": {
+      "base": "Use 2-3x more spacing than typical. p-8, p-12, p-16.",
+      "container_padding": "px-6 md:px-12 lg:px-24",
+      "section_gap": "gap-16 md:gap-24"
+    },
+    "grid_systems": {
+      "marketing": "The Tetris Grid: Asymmetrical bento grids. Mix col-span-2 with col-span-1. Never equal columns.",
+      "dashboard": "High Density Bento: Tight gaps (gap-4). Use col-span-full for main charts, col-span-1 for stats."
+    },
+    "border_radius": {
+      "default": "rounded-lg",
+      "buttons": "rounded-full",
+      "cards": "rounded-xl"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1",
+      "secondary": "bg-white text-slate-900 border-2 border-slate-200 hover:border-slate-900 rounded-full px-8 py-6 text-lg font-medium transition-all"
+    },
+    "cards": {
+      "marketing": "bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all p-8 rounded-2xl",
+      "dashboard": "bg-white border border-slate-200 shadow-none rounded-xl p-6"
+    },
+    "inputs": {
+      "style": "bg-slate-50 border-slate-200 focus:border-primary focus:ring-primary/20 rounded-lg h-12"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Use subtle noise overlays on solid backgrounds to reduce 'digital flatness'.",
+    "shadows": "Layered shadows: shadow-sm for depth + shadow-orange-500/10 for brand glow.",
+    "glassmorphism": "Use backdrop-blur-xl bg-white/80 for sticky headers. Border-b border-slate-200/50."
+  },
+  "image_urls": {
+    "hero_section": {
+      "url": "https://images.unsplash.com/photo-1672335468275-e79517ae9f95?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHw0fHxpbmRpYW4lMjBzaG9wa2VlcGVyJTIwc21pbGluZyUyMGtpcmFuYSUyMHN0b3JlfGVufDB8fHx8MTc2OTA4MDkxN3ww&ixlib=rb-4.1.0&q=85",
+      "alt": "Friendly Indian shopkeeper smiling",
+      "usage": "Hero image, right side or background with overlay"
+    },
+    "features_mobile": {
+      "url": "https://images.unsplash.com/photo-1766716946030-5869da2a0ead?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBtZXJjaGFudCUyMHVzaW5nJTIwc21hcnRwaG9uZSUyMHBheW1lbnR8ZW58MHx8fHwxNzY5MDgwOTE5fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Merchant using smartphone",
+      "usage": "Mobile app feature section"
+    },
+    "testimonials": {
+      "url": "https://images.unsplash.com/photo-1664101606938-e664f5852fac?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBzaG9wa2VlcGVyJTIwc21pbGluZyUyMGtpcmFuYSUyMHN0b3JlfGVufDB8fHx8MTc2OTA4MDkxN3ww&ixlib=rb-4.1.0&q=85",
+      "alt": "Experienced shop owner",
+      "usage": "Testimonial avatar or case study cover"
+    },
+    "dashboard_mockup": {
+      "url": "https://images.unsplash.com/photo-1653548410459-5dffc2cef115?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBlY29tbWVyY2UlMjBkYXNoYm9hcmQlMjB1aSUyMGNvbmNlcHR8ZW58MHx8fHwxNzY5MDgwOTIxfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Clean dashboard concept",
+      "usage": "Feature grid item"
+    }
+  },
+  "instructions_to_main_agent": {
+    "general": "You are building ShopSwift India. Focus on simplicity and trust. Do not use complex jargon. Use the 'Eczar' font for headings to give it a unique identity.",
+    "shadcn_overrides": "Override default shadcn radius to 0.5rem or 0.75rem. Use the custom colors defined above.",
+    "animations": "Use framer-motion for entrance animations (staggered fade-ins). Use 'sonner' for toasts.",
+    "charts": "Use Recharts (via Shadcn Charts) for the analytics dashboard. Keep them simple (Bar and Line charts mostly).",
+    "language": "Ensure the UI supports bilingual text (English/Hindi). Use a toggle in the navbar."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use 'sonner' for toasts. Sonner component are located in /app/src/components/ui/sonner.tsx"
+  ]
+}
