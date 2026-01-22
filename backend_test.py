@@ -104,12 +104,14 @@ class ShopSwiftAPITester:
             }
             db.users.insert_one(user_doc)
             
-            # Insert test session
+            # Insert test session with proper timezone
+            from datetime import timezone, timedelta
+            expires_at = datetime.now(timezone.utc) + timedelta(days=7)
             session_doc = {
                 "user_id": self.user_id,
                 "session_token": self.session_token,
-                "expires_at": datetime.utcnow().replace(year=2025, month=12).isoformat(),
-                "created_at": datetime.utcnow().isoformat()
+                "expires_at": expires_at.isoformat(),
+                "created_at": datetime.now(timezone.utc).isoformat()
             }
             db.user_sessions.insert_one(session_doc)
             
