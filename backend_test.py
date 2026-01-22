@@ -100,7 +100,7 @@ class ShopSwiftAPITester:
                 "name": "Test User",
                 "picture": "https://via.placeholder.com/150",
                 "phone": None,
-                "created_at": datetime.utcnow().isoformat()
+                "created_at": datetime.now(timezone.utc).isoformat()
             }
             db.users.insert_one(user_doc)
             
