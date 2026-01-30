@@ -36,8 +36,33 @@ export default function Products() {
     try {
       const response = await axios.get(`${API}/products`, { withCredentials: true });
       setProducts(response.data);
+      
+      // Save to offline storage
+      await offlineStorage.saveProducts(response.data);
     } catch (error) {
-      toast.error('Failed to load products');
+      // Try loading from offline storage
+      if (!navigator.onLine) {
+        try {
+          const demoToken = localStorage.getItem('demo_session_token');
+          if (demoToken) {
+            const userRes = await axios.get(`${API}/auth/me`, {
+              withCredentials: true,
+              headers: { 'Authorization': `Bearer ${demoToken}` }
+            });
+            const storeRes = await axios.get(`${API}/stores/my-store`, {
+              withCredentials: true,
+              headers: { 'Authorization': `Bearer ${demoToken}` }
+            });
+            const offlineProducts = await offlineStorage.getProducts(storeRes.data.store_id);
+            setProducts(offlineProducts || []);
+            toast.info('Viewing offline data', { icon: <WifiOff className="h-4 w-4" /> });
+          }
+        } catch (offlineError) {
+          console.error('Offline load failed:', offlineError);
+        }
+      } else {
+        toast.error('Failed to load products');
+      }
     } finally {
       setLoading(false);
     }
