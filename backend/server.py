@@ -30,6 +30,14 @@ db = client[os.environ['DB_NAME']]
 # Razorpay client
 razorpay_client = razorpay.Client(auth=(os.getenv("RAZORPAY_KEY_ID", "test_key"), os.getenv("RAZORPAY_KEY_SECRET", "test_secret")))
 
+# Socket.io setup
+sio = socketio.AsyncServer(
+    async_mode='asgi',
+    cors_allowed_origins='*',
+    logger=True,
+    engineio_logger=True
+)
+
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
