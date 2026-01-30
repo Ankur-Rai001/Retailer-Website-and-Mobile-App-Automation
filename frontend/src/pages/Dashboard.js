@@ -145,6 +145,14 @@ export default function Dashboard() {
                 Add New Product
               </Button>
               <Button 
+                onClick={() => navigate('/mobile-app')}
+                variant="outline"
+                className="w-full justify-start rounded-lg h-12 border-2 border-primary text-primary hover:bg-primary/10"
+              >
+                <Smartphone className="h-5 w-5 mr-2" />
+                Generate Mobile App
+              </Button>
+              <Button 
                 onClick={() => navigate('/orders')}
                 variant="outline"
                 className="w-full justify-start rounded-lg h-12"
