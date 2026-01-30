@@ -604,7 +604,7 @@ async def get_mobile_app_status(user: User = Depends(get_current_user)):
 def generate_publishing_guide(store: Dict) -> str:
     package_name = f"com.shopswift.{store['subdomain'].lower().replace('-', '').replace('_', '')}"
     
-    return f\"\"\"# Publishing Guide - {store['store_name']} Mobile App
+    return f"""# Publishing Guide - {store['store_name']} Mobile App
 
 ## Centralized Publishing by ShopSwift India
 
