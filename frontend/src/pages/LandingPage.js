@@ -23,13 +23,23 @@ export default function LandingPage() {
               <Store className="h-8 w-8 text-primary" />
               <span className="font-heading text-2xl font-bold text-secondary">ShopSwift India</span>
             </div>
-            <Button 
-              onClick={handleLogin}
-              data-testid="login-button"
-              className="bg-primary text-white hover:bg-primary/90 rounded-full px-6 py-5 font-semibold shadow-lg transition-all hover:shadow-xl hover:-translate-y-0.5"
-            >
-              Get Started Free
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button 
+                onClick={handleDemoClick}
+                variant="ghost"
+                data-testid="demo-button"
+                className="text-secondary hover:text-primary font-semibold"
+              >
+                Try Demo
+              </Button>
+              <Button 
+                onClick={handleLogin}
+                data-testid="login-button"
+                className="bg-primary text-white hover:bg-primary/90 rounded-full px-6 py-5 font-semibold shadow-lg transition-all hover:shadow-xl hover:-translate-y-0.5"
+              >
+                Get Started Free
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
