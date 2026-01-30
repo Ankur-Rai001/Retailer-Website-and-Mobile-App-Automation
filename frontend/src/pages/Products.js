@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Package, Plus, Edit, Trash2, ArrowLeft, Loader2 } from 'lucide-react';
+import { Package, Plus, Edit, Trash2, ArrowLeft, Loader2, WifiOff } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
 import { toast } from 'sonner';
+import { offlineStorage } from '../utils/offlineStorage';
+import { optimizeImageUrl, getOptimalImageSize } from '../utils/imageOptimization';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
