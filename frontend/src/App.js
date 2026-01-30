@@ -11,6 +11,8 @@ import Orders from "./pages/Orders";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PWAInstallPrompt from "./components/PWAInstallPrompt";
+import OfflineBanner from "./components/OfflineBanner";
 import { registerServiceWorker, onNetworkChange } from "./utils/pwa";
 import { toast } from "sonner";
 import "./App.css";
