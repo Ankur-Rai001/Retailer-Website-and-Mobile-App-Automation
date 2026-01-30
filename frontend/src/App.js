@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import Orders from "./pages/Orders";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
+import MobileApp from "./pages/MobileApp";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import OfflineBanner from "./components/OfflineBanner";
