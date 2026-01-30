@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
 import AuthCallback from "./pages/AuthCallback";
@@ -10,6 +11,8 @@ import Orders from "./pages/Orders";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { registerServiceWorker, onNetworkChange } from "./utils/pwa";
+import { toast } from "sonner";
 import "./App.css";
 
 function AppRouter() {
