@@ -40,6 +40,20 @@ function AppRouter() {
 }
 
 function App() {
+  useEffect(() => {
+    // Register service worker for PWA
+    registerServiceWorker();
+    
+    // Monitor network changes
+    onNetworkChange((isOnline) => {
+      if (isOnline) {
+        toast.success('Back online! Syncing data...', { duration: 3000 });
+      } else {
+        toast.warning('You are offline. Some features may be limited.', { duration: 5000 });
+      }
+    });
+  }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
