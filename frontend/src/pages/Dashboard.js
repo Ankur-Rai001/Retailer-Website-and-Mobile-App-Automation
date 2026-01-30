@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Store, Package, ShoppingCart, TrendingUp, Plus, Settings, LogOut, BarChart3 } from 'lucide-react';
+import { Store, Package, ShoppingCart, TrendingUp, Plus, Settings, LogOut, BarChart3, Smartphone } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { toast } from 'sonner';
 
