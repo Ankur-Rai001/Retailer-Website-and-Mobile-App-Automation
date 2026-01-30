@@ -20,14 +20,24 @@ export default function ProtectedRoute({ children }) {
 
     const checkAuth = async () => {
       try {
-        const response = await axios.get(`${API}/auth/me`, {
+        // Check for demo token first
+        const demoToken = location.state?.demoToken || localStorage.getItem('demo_session_token');
+        
+        const config = {
           withCredentials: true
-        });
+        };
+        
+        if (demoToken) {
+          config.headers = { 'Authorization': `Bearer ${demoToken}` };
+        }
+
+        const response = await axios.get(`${API}/auth/me`, config);
         setUser(response.data);
         setIsAuthenticated(true);
       } catch (error) {
         setIsAuthenticated(false);
-        navigate('/');
+        localStorage.removeItem('demo_session_token');
+        navigate('/demo-login');
       }
     };
 
