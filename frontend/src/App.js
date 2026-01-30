@@ -11,6 +11,7 @@ import Orders from "./pages/Orders";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import MobileApp from "./pages/MobileApp";
+import ONDCIntegration from "./pages/ONDCIntegration";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import OfflineBanner from "./components/OfflineBanner";
