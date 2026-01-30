@@ -37,6 +37,8 @@ function AppRouter() {
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
       </Routes>
       <Toaster position="top-right" />
+      <PWAInstallPrompt />
+      <OfflineBanner />
     </>
   );
 }
