@@ -964,7 +964,7 @@ async def ondc_confirm_webhook(request: Request):
             raise HTTPException(status_code=404, detail="Store not found")
         
         # Create order in our system
-        order_id = f\"ondc_{uuid.uuid4().hex[:12]}\"
+        order_id = f"ondc_{uuid.uuid4().hex[:12]}"
         
         order_doc = {
             "order_id": order_id,
