@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-route
 import { Toaster } from "./components/ui/sonner";
 import LandingPage from "./pages/LandingPage";
 import AuthCallback from "./pages/AuthCallback";
+import DemoLogin from "./pages/DemoLogin";
 import Dashboard from "./pages/Dashboard";
 import StoreSetup from "./pages/StoreSetup";
 import Products from "./pages/Products";
