@@ -36,6 +36,7 @@ function AppRouter() {
         <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+        <Route path="/mobile-app" element={<ProtectedRoute><MobileApp /></ProtectedRoute>} />
       </Routes>
       <Toaster position="top-right" />
       <PWAInstallPrompt />
