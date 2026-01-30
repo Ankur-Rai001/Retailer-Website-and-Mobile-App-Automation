@@ -38,6 +38,7 @@ function AppRouter() {
         <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path="/mobile-app" element={<ProtectedRoute><MobileApp /></ProtectedRoute>} />
+        <Route path="/ondc" element={<ProtectedRoute><ONDCIntegration /></ProtectedRoute>} />
       </Routes>
       <Toaster position="top-right" />
       <PWAInstallPrompt />
