@@ -832,7 +832,7 @@ async def get_ondc_sync_status(user: User = Depends(get_current_user)):
 # ONDC Beckn Protocol Webhooks (for receiving orders from buyer apps)
 @api_router.post("/ondc/webhooks/search")
 async def ondc_search_webhook(request: Request):
-    \"\"\"Handle ONDC search requests\"\"\"
+    """Handle ONDC search requests"""
     try:
         payload = await request.json()
         
@@ -889,7 +889,7 @@ async def ondc_search_webhook(request: Request):
 
 @api_router.post("/ondc/webhooks/select")
 async def ondc_select_webhook(request: Request):
-    \"\"\"Handle ONDC select requests (item selection)\"\"\"
+    """Handle ONDC select requests (item selection)\"\"\"
     try:
         payload = await request.json()
         order = payload.get("message", {}).get("order", {})
@@ -920,7 +920,7 @@ async def ondc_select_webhook(request: Request):
 
 @api_router.post("/ondc/webhooks/init")
 async def ondc_init_webhook(request: Request):
-    \"\"\"Handle ONDC init requests (order initialization)\"\"\"
+    """Handle ONDC init requests (order initialization)\"\"\"
     try:
         payload = await request.json()
         order = payload.get("message", {}).get("order", {})
@@ -952,7 +952,7 @@ async def ondc_init_webhook(request: Request):
 
 @api_router.post("/ondc/webhooks/confirm")
 async def ondc_confirm_webhook(request: Request):
-    \"\"\"Handle ONDC confirm requests (order confirmation)\"\"\"
+    """Handle ONDC confirm requests (order confirmation)\"\"\"
     try:
         payload = await request.json()
         order = payload.get("message", {}).get("order", {})
