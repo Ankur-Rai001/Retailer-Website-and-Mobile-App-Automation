@@ -271,11 +271,13 @@ export default function Settings() {
                 <h3 className="font-semibold text-secondary">ONDC Integration</h3>
                 <p className="text-sm text-muted">List your products on ONDC network (PhonePe, Paytm, etc.)</p>
               </div>
-              <Switch
-                data-testid="ondc-toggle"
-                checked={formData.ondc_enabled}
-                onCheckedChange={(checked) => setFormData({ ...formData, ondc_enabled: checked })}
-              />
+              <Button
+                onClick={() => navigate('/ondc')}
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary/10"
+              >
+                Configure ONDC
+              </Button>
             </div>
           </div>
 
