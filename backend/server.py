@@ -1044,6 +1044,193 @@ async def get_products_public(store_id: str):
     
     return [Product(**p).model_dump() for p in products]
 
+# ============ CHAT & SOCKET.IO ROUTES ============
+
+class ChatMessage(BaseModel):
+    message_id: str = Field(default_factory=lambda: f"msg_{uuid.uuid4().hex[:12]}")
+    store_id: str
+    customer_id: str
+    customer_name: str
+    sender: str  # 'customer' or 'retailer'
+    message: str
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    read: bool = False
+
+@api_router.post("/chat/send")
+async def send_chat_message(
+    store_id: str,
+    customer_id: str,
+    customer_name: str,
+    message: str,
+    sender: str = "customer"
+):
+    """Send a chat message (customer or retailer)"""
+    try:
+        msg_doc = {
+            "message_id": f"msg_{uuid.uuid4().hex[:12]}",
+            "store_id": store_id,
+            "customer_id": customer_id,
+            "customer_name": customer_name,
+            "sender": sender,
+            "message": message,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "read": False
+        }
+        
+        await db.chat_messages.insert_one(msg_doc)
+        
+        # Emit via Socket.io
+        await sio.emit(f"new_message_{store_id}", msg_doc)
+        
+        return {"success": True, "message_id": msg_doc["message_id"]}
+    except Exception as e:
+        logging.error(f"Chat send error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/chat/messages/{store_id}")
+async def get_chat_messages(store_id: str, customer_id: Optional[str] = None):
+    """Get chat messages for a store (optionally filtered by customer)"""
+    try:
+        query = {"store_id": store_id}
+        if customer_id:
+            query["customer_id"] = customer_id
+        
+        messages = await db.chat_messages.find(
+            query,
+            {"_id": 0}
+        ).sort("timestamp", 1).to_list(1000)
+        
+        return messages
+    except Exception as e:
+        logging.error(f"Chat fetch error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/chat/conversations/{store_id}")
+async def get_chat_conversations(store_id: str, user: User = Depends(get_current_user)):
+    """Get all customer conversations for a store (retailer view)"""
+    try:
+        store = await db.stores.find_one({"user_id": user.user_id, "store_id": store_id}, {"_id": 0})
+        if not store:
+            raise HTTPException(status_code=404, detail="Store not found")
+        
+        # Get unique customers with their last message
+        pipeline = [
+            {"$match": {"store_id": store_id}},
+            {"$sort": {"timestamp": -1}},
+            {"$group": {
+                "_id": "$customer_id",
+                "customer_name": {"$first": "$customer_name"},
+                "last_message": {"$first": "$message"},
+                "last_timestamp": {"$first": "$timestamp"},
+                "unread_count": {
+                    "$sum": {
+                        "$cond": [
+                            {"$and": [{"$eq": ["$sender", "customer"]}, {"$eq": ["$read", False]}]},
+                            1,
+                            0
+                        ]
+                    }
+                }
+            }},
+            {"$sort": {"last_timestamp": -1}}
+        ]
+        
+        conversations = await db.chat_messages.aggregate(pipeline).to_list(100)
+        
+        return [{
+            "customer_id": conv["_id"],
+            "customer_name": conv["customer_name"],
+            "last_message": conv["last_message"],
+            "last_timestamp": conv["last_timestamp"],
+            "unread_count": conv["unread_count"]
+        } for conv in conversations]
+    except Exception as e:
+        logging.error(f"Conversations fetch error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/chat/mark-read")
+async def mark_messages_read(store_id: str, customer_id: str, user: User = Depends(get_current_user)):
+    """Mark messages as read"""
+    try:
+        await db.chat_messages.update_many(
+            {"store_id": store_id, "customer_id": customer_id, "sender": "customer", "read": False},
+            {"$set": {"read": True}}
+        )
+        return {"success": True}
+    except Exception as e:
+        logging.error(f"Mark read error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Socket.io event handlers
+@sio.event
+async def connect(sid, environ):
+    logging.info(f"Socket.io client connected: {sid}")
+    await sio.emit('connection_established', {'sid': sid}, room=sid)
+
+@sio.event
+async def disconnect(sid):
+    logging.info(f"Socket.io client disconnected: {sid}")
+
+@sio.event
+async def join_store(sid, data):
+    """Join a store's chat room"""
+    store_id = data.get('store_id')
+    if store_id:
+        await sio.enter_room(sid, f"store_{store_id}")
+        logging.info(f"Client {sid} joined store_{store_id}")
+        await sio.emit('joined_store', {'store_id': store_id}, room=sid)
+
+@sio.event
+async def leave_store(sid, data):
+    """Leave a store's chat room"""
+    store_id = data.get('store_id')
+    if store_id:
+        await sio.leave_room(sid, f"store_{store_id}")
+        logging.info(f"Client {sid} left store_{store_id}")
+
+@sio.event
+async def send_message(sid, data):
+    """Send a message via Socket.io"""
+    try:
+        store_id = data.get('store_id')
+        customer_id = data.get('customer_id')
+        customer_name = data.get('customer_name', 'Customer')
+        message = data.get('message')
+        sender = data.get('sender', 'customer')
+        
+        msg_doc = {
+            "message_id": f"msg_{uuid.uuid4().hex[:12]}",
+            "store_id": store_id,
+            "customer_id": customer_id,
+            "customer_name": customer_name,
+            "sender": sender,
+            "message": message,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "read": False
+        }
+        
+        # Save to database
+        await db.chat_messages.insert_one(msg_doc)
+        
+        # Broadcast to store room
+        await sio.emit('new_message', msg_doc, room=f"store_{store_id}")
+        
+    except Exception as e:
+        logging.error(f"Socket.io send_message error: {e}")
+        await sio.emit('error', {'message': str(e)}, room=sid)
+
+@sio.event
+async def typing(sid, data):
+    """Broadcast typing indicator"""
+    store_id = data.get('store_id')
+    customer_name = data.get('customer_name', 'Someone')
+    sender = data.get('sender', 'customer')
+    
+    await sio.emit('user_typing', {
+        'customer_name': customer_name,
+        'sender': sender
+    }, room=f"store_{store_id}", skip_sid=sid)
+
 app.include_router(api_router)
 
 app.add_middleware(
