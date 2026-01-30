@@ -23,6 +23,7 @@ function AppRouter() {
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/demo-login" element={<DemoLogin />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/store-setup" element={<ProtectedRoute><StoreSetup /></ProtectedRoute>} />
         <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
