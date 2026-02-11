@@ -10,6 +10,45 @@ from deps import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
+DEMO_ACCOUNTS = {
+    "demo_session_retailer_12345678901234567890": {
+        "user_id": "user_demo_retailer",
+        "email": "demo.retailer@shopswift.in",
+        "name": "Demo Retailer",
+        "role": "retailer"
+    },
+    "demo_session_admin_12345678901234567890": {
+        "user_id": "user_demo_admin",
+        "email": "demo.admin@shopswift.in",
+        "name": "Demo Admin",
+        "role": "admin"
+    }
+}
+
+
+async def seed_demo_accounts():
+    """Seed demo users and sessions on startup."""
+    for token, account in DEMO_ACCOUNTS.items():
+        existing = await db.users.find_one({"user_id": account["user_id"]}, {"_id": 0})
+        if not existing:
+            await db.users.insert_one({
+                **account,
+                "phone": None,
+                "picture": None,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            })
+
+        await db.user_sessions.update_one(
+            {"session_token": token},
+            {"$set": {
+                "user_id": account["user_id"],
+                "session_token": token,
+                "expires_at": (datetime.now(timezone.utc) + timedelta(days=365)).isoformat(),
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }},
+            upsert=True
+        )
+
 
 @router.post("/session")
 async def create_session(request: SessionRequest, response: Response):
