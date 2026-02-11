@@ -27,7 +27,7 @@ DEMO_ACCOUNTS = {
 
 
 async def seed_demo_accounts():
-    """Seed demo users and sessions on startup."""
+    """Seed demo users, sessions, and a demo store on startup."""
     for token, account in DEMO_ACCOUNTS.items():
         existing = await db.users.find_one({"user_id": account["user_id"]}, {"_id": 0})
         if not existing:
@@ -48,6 +48,29 @@ async def seed_demo_accounts():
             }},
             upsert=True
         )
+
+    # Seed demo store for the retailer
+    demo_store = await db.stores.find_one({"user_id": "user_demo_retailer"}, {"_id": 0})
+    if not demo_store:
+        await db.stores.insert_one({
+            "store_id": "store_demo_001",
+            "user_id": "user_demo_retailer",
+            "store_name": "Demo General Store",
+            "subdomain": "demogeneralstore",
+            "custom_domain": None,
+            "template_id": "modern_minimal",
+            "logo_url": None,
+            "description": "Welcome to Demo General Store! Your one-stop shop for everyday essentials in India.",
+            "category": "general",
+            "language": "en",
+            "subscription_status": "trial",
+            "subscription_tier": "basic",
+            "gst_number": None,
+            "address": "MG Road, Bengaluru, Karnataka",
+            "phone": "+91-9876543210",
+            "ondc_enabled": False,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        })
 
 
 @router.post("/session")
