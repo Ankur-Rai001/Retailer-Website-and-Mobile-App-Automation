@@ -72,6 +72,42 @@ async def seed_demo_accounts():
             "created_at": datetime.now(timezone.utc).isoformat()
         })
 
+    # Seed extra demo retailers for admin dashboard
+    sample_retailers = [
+        {"user_id": "user_seed_r1", "email": "priya.fashions@shopswift.in", "name": "Priya Fashions", "role": "retailer", "phone": "+91-9900112233",
+         "store": {"store_id": "store_seed_001", "store_name": "Priya Fashions", "subdomain": "priyafashions", "category": "clothing", "subscription_status": "active", "subscription_tier": "pro", "ondc_enabled": True}},
+        {"user_id": "user_seed_r2", "email": "ravi.electronics@shopswift.in", "name": "Ravi Electronics Hub", "role": "retailer", "phone": "+91-9988776655",
+         "store": {"store_id": "store_seed_002", "store_name": "Ravi Electronics Hub", "subdomain": "ravielectronics", "category": "electronics", "subscription_status": "active", "subscription_tier": "premium", "ondc_enabled": True}},
+        {"user_id": "user_seed_r3", "email": "anita.grocery@shopswift.in", "name": "Anita Fresh Mart", "role": "retailer", "phone": "+91-9871234567",
+         "store": {"store_id": "store_seed_003", "store_name": "Anita Fresh Mart", "subdomain": "anitafreshmart", "category": "grocery", "subscription_status": "trial", "subscription_tier": "basic", "ondc_enabled": False}},
+        {"user_id": "user_seed_r4", "email": "suresh.kirana@shopswift.in", "name": "Suresh Kirana Store", "role": "retailer", "phone": "+91-9123456789",
+         "store": {"store_id": "store_seed_004", "store_name": "Suresh Kirana Store", "subdomain": "sureshkirana", "category": "grocery", "subscription_status": "expired", "subscription_tier": "basic", "ondc_enabled": False}},
+        {"user_id": "user_seed_r5", "email": "meena.jewels@shopswift.in", "name": "Meena Jewellers", "role": "retailer", "phone": "+91-9876001234",
+         "store": {"store_id": "store_seed_005", "store_name": "Meena Jewellers", "subdomain": "meenajewels", "category": "jewelry", "subscription_status": "active", "subscription_tier": "premium", "ondc_enabled": True}},
+    ]
+
+    for r in sample_retailers:
+        if not await db.users.find_one({"user_id": r["user_id"]}):
+            await db.users.insert_one({
+                "user_id": r["user_id"], "email": r["email"], "name": r["name"],
+                "role": r["role"], "phone": r.get("phone"), "picture": None,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            })
+        s = r["store"]
+        if not await db.stores.find_one({"store_id": s["store_id"]}):
+            await db.stores.insert_one({
+                "store_id": s["store_id"], "user_id": r["user_id"],
+                "store_name": s["store_name"], "subdomain": s["subdomain"],
+                "custom_domain": None, "template_id": "modern_minimal",
+                "logo_url": None, "description": f"Welcome to {s['store_name']}!",
+                "category": s["category"], "language": "en",
+                "subscription_status": s["subscription_status"],
+                "subscription_tier": s["subscription_tier"],
+                "gst_number": None, "address": "India",
+                "phone": r.get("phone"), "ondc_enabled": s["ondc_enabled"],
+                "created_at": datetime.now(timezone.utc).isoformat()
+            })
+
 
 @router.post("/session")
 async def create_session(request: SessionRequest, response: Response):
