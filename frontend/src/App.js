@@ -12,6 +12,7 @@ import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import MobileApp from "./pages/MobileApp";
 import ONDCIntegration from "./pages/ONDCIntegration";
+import Chat from "./pages/Chat";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import OfflineBanner from "./components/OfflineBanner";
@@ -39,6 +40,7 @@ function AppRouter() {
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path="/mobile-app" element={<ProtectedRoute><MobileApp /></ProtectedRoute>} />
         <Route path="/ondc" element={<ProtectedRoute><ONDCIntegration /></ProtectedRoute>} />
+        <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
       </Routes>
       <Toaster position="top-right" />
       <PWAInstallPrompt />
