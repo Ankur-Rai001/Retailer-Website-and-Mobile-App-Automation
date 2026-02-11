@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Store, Package, ShoppingCart, TrendingUp, Plus, Settings, LogOut, BarChart3, Smartphone } from 'lucide-react';
+import { Store, Package, ShoppingCart, TrendingUp, Plus, Settings, LogOut, BarChart3, Smartphone, MessageCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { toast } from 'sonner';
 
@@ -159,6 +159,14 @@ export default function Dashboard() {
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 View Orders
+              </Button>
+              <Button 
+                onClick={() => navigate('/chat')}
+                variant="outline"
+                className="w-full justify-start rounded-lg h-12 border-2 border-accent text-accent hover:bg-accent/10"
+              >
+                <MessageCircle className="h-5 w-5 mr-2" />
+                Customer Chat
               </Button>
               <Button 
                 onClick={() => navigate('/analytics')}
