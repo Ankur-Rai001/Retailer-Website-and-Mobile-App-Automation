@@ -36,34 +36,17 @@ export default function DemoLogin() {
     const account = DEMO_ACCOUNTS[accountType];
 
     try {
-      // Set the session cookie by calling backend with the demo token
-      await axios.post(
-        `${API}/auth/session`,
-        { session_id: 'demo' },
-        { 
-          withCredentials: true,
-          headers: {
-            'Authorization': `Bearer ${account.token}`
-          }
-        }
-      ).catch(() => {
-        // If session endpoint fails, we'll manually set cookie via a custom endpoint
-        // For demo purposes, we'll navigate with the token
-      });
+      // Use dedicated demo login endpoint
+      const response = await axios.post(
+        `${API}/auth/demo-login`,
+        {},
+        { withCredentials: true }
+      );
 
-      // Verify authentication
-      const response = await axios.get(`${API}/auth/me`, {
-        withCredentials: true,
-        headers: {
-          'Authorization': `Bearer ${account.token}`
-        }
-      });
-
-      // Store token in localStorage for demo purposes
       localStorage.setItem('demo_session_token', account.token);
       
       toast.success(`Welcome, ${response.data.name}!`);
-      navigate('/dashboard', { state: { user: response.data, demoToken: account.token } });
+      navigate('/dashboard');
     } catch (error) {
       console.error('Demo login error:', error);
       toast.error('Demo login failed. Please try again.');
