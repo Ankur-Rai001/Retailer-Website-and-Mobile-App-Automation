@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 import uuid
 
 class ShopSwiftAPITester:
-    def __init__(self, base_url="https://retail-connect-40.preview.emergentagent.com"):
+    def __init__(self, base_url="https://store-builder-mvp.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_token = None

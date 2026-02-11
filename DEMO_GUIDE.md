@@ -1,14 +1,14 @@
 # ShopSwift India - Live Preview & Demo Guide
 
 ## 🔗 Live Preview URL
-**https://retail-connect-40.preview.emergentagent.com**
+**https://store-builder-mvp.preview.emergentagent.com**
 
 ---
 
 ## 🎯 Quick Access Demo Accounts
 
 ### Method 1: Easy Demo Login (Recommended)
-Visit: **https://retail-connect-40.preview.emergentagent.com/demo-login**
+Visit: **https://store-builder-mvp.preview.emergentagent.com/demo-login**
 
 Click on either:
 - **"Login as Retailer"** - Full store management experience
@@ -52,7 +52,7 @@ Role: Platform Administrator
 ## 📋 Testing Checklist
 
 ### 1. Landing Page
-- [x] Visit homepage: https://retail-connect-40.preview.emergentagent.com
+- [x] Visit homepage: https://store-builder-mvp.preview.emergentagent.com
 - [x] Click "Try Demo" button (top right)
 - [x] Verify design: Eczar font headings, Digital Saffron (#F97316) color
 - [x] Check "Zero Transaction Fees" messaging is prominent
@@ -114,20 +114,20 @@ Role: Platform Administrator
 
 ### Base URL
 ```
-https://retail-connect-40.preview.emergentagent.com/api
+https://store-builder-mvp.preview.emergentagent.com/api
 ```
 
 ### Test Endpoints
 
 #### 1. Health Check
 ```bash
-curl https://retail-connect-40.preview.emergentagent.com/api/
+curl https://store-builder-mvp.preview.emergentagent.com/api/
 ```
 Expected: `{"message": "ShopSwift India API", "status": "running"}`
 
 #### 2. Get Templates
 ```bash
-curl https://retail-connect-40.preview.emergentagent.com/api/templates
+curl https://store-builder-mvp.preview.emergentagent.com/api/templates
 ```
 Expected: Array of 4 templates
 
@@ -135,24 +135,24 @@ Expected: Array of 4 templates
 ```bash
 # Get current user
 curl -H "Authorization: Bearer demo_session_retailer_12345678901234567890" \
-  https://retail-connect-40.preview.emergentagent.com/api/auth/me
+  https://store-builder-mvp.preview.emergentagent.com/api/auth/me
 
 # Get store
 curl -H "Authorization: Bearer demo_session_retailer_12345678901234567890" \
-  https://retail-connect-40.preview.emergentagent.com/api/stores/my-store
+  https://store-builder-mvp.preview.emergentagent.com/api/stores/my-store
 
 # Get products
 curl -H "Authorization: Bearer demo_session_retailer_12345678901234567890" \
-  https://retail-connect-40.preview.emergentagent.com/api/products
+  https://store-builder-mvp.preview.emergentagent.com/api/products
 
 # Get analytics
 curl -H "Authorization: Bearer demo_session_retailer_12345678901234567890" \
-  https://retail-connect-40.preview.emergentagent.com/api/analytics/overview
+  https://store-builder-mvp.preview.emergentagent.com/api/analytics/overview
 ```
 
 #### 4. Create Product
 ```bash
-curl -X POST https://retail-connect-40.preview.emergentagent.com/api/products \
+curl -X POST https://store-builder-mvp.preview.emergentagent.com/api/products \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer demo_session_retailer_12345678901234567890" \
   -d '{
@@ -221,7 +221,7 @@ curl -X POST https://retail-connect-40.preview.emergentagent.com/api/products \
 ## 🚀 Real Account Testing
 
 ### Create Your Own Store
-1. Visit: https://retail-connect-40.preview.emergentagent.com
+1. Visit: https://store-builder-mvp.preview.emergentagent.com
 2. Click "Get Started Free"
 3. Sign in with Google (Emergent OAuth)
 4. Complete store creation wizard

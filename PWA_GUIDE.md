@@ -41,14 +41,14 @@
 
 ### Test 1: Install on Android
 1. Open Chrome on Android device
-2. Visit: `https://retail-connect-40.preview.emergentagent.com`
+2. Visit: `https://store-builder-mvp.preview.emergentagent.com`
 3. Tap menu (3 dots) → "Install app" or "Add to Home screen"
 4. App icon will appear on home screen
 5. Opens in standalone mode (no browser UI)
 
 ### Test 2: Install on iOS
 1. Open Safari on iPhone/iPad
-2. Visit: `https://retail-connect-40.preview.emergentagent.com`
+2. Visit: `https://store-builder-mvp.preview.emergentagent.com`
 3. Tap Share button → "Add to Home Screen"
 4. Edit name if desired → Add
 5. App icon appears on home screen
@@ -176,12 +176,12 @@ Try cache → Found: Return & update in background
 
 ### Check PWA Manifest
 ```bash
-curl https://retail-connect-40.preview.emergentagent.com/manifest.json
+curl https://store-builder-mvp.preview.emergentagent.com/manifest.json
 ```
 
 ### Check Service Worker
 ```bash
-curl https://retail-connect-40.preview.emergentagent.com/service-worker.js | head -20
+curl https://store-builder-mvp.preview.emergentagent.com/service-worker.js | head -20
 ```
 
 ### Test Offline (Browser DevTools)
@@ -207,9 +207,9 @@ curl https://retail-connect-40.preview.emergentagent.com/service-worker.js | hea
 ## 📱 Mobile Browser Testing
 
 ### Test URLs
-- **Landing:** https://retail-connect-40.preview.emergentagent.com
-- **Demo Login:** https://retail-connect-40.preview.emergentagent.com/demo-login
-- **Dashboard:** https://retail-connect-40.preview.emergentagent.com/dashboard
+- **Landing:** https://store-builder-mvp.preview.emergentagent.com
+- **Demo Login:** https://store-builder-mvp.preview.emergentagent.com/demo-login
+- **Dashboard:** https://store-builder-mvp.preview.emergentagent.com/dashboard
 
 ### Test Devices
 - iPhone 12/13/14 (Safari)
