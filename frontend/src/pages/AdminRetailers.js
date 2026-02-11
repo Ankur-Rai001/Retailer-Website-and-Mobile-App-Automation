@@ -74,7 +74,7 @@ export default function AdminRetailers() {
 
   useEffect(() => {
     if (!loading) fetchRetailers();
-  }, [search, filterStatus, filterTier]);
+  }, [search, filterStatus, filterTier]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (
