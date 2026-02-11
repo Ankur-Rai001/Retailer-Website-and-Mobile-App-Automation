@@ -48,6 +48,12 @@ async def root():
 app.include_router(api_router)
 
 
+@app.on_event("startup")
+async def startup():
+    from routers.auth import seed_demo_accounts
+    await seed_demo_accounts()
+
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
