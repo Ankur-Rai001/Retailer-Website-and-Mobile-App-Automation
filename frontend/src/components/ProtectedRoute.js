@@ -20,13 +20,10 @@ export default function ProtectedRoute({ children }) {
 
     const checkAuth = async () => {
       try {
-        // Check for demo token first
-        const demoToken = location.state?.demoToken || localStorage.getItem('demo_session_token');
-        
-        const config = {
-          withCredentials: true
-        };
-        
+        const config = { withCredentials: true };
+
+        // Add demo token as fallback
+        const demoToken = localStorage.getItem('demo_session_token');
         if (demoToken) {
           config.headers = { 'Authorization': `Bearer ${demoToken}` };
         }
