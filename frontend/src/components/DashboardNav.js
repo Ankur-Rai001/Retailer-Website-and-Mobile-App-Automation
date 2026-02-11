@@ -1,4 +1,4 @@
-import { Store, Package, ShoppingCart, BarChart3, Settings, LogOut } from 'lucide-react';
+import { Store, Package, ShoppingCart, BarChart3, Settings, LogOut, MessageCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
 import axios from 'axios';
@@ -25,6 +25,7 @@ export default function DashboardNav({ user }) {
     { path: '/products', icon: Package, label: 'Products' },
     { path: '/orders', icon: ShoppingCart, label: 'Orders' },
     { path: '/analytics', icon: BarChart3, label: 'Analytics' },
+    { path: '/chat', icon: MessageCircle, label: 'Chat' },
     { path: '/settings', icon: Settings, label: 'Settings' },
   ];
 
