@@ -1,4 +1,4 @@
-from fastapi import Request, HTTPException, Header
+from fastapi import Request, HTTPException, Header, Depends
 from typing import Optional
 from datetime import datetime, timezone
 from database import db
@@ -34,3 +34,9 @@ async def get_current_user(request: Request, authorization: Optional[str] = Head
         user_doc['created_at'] = datetime.fromisoformat(user_doc['created_at'])
 
     return User(**user_doc)
+
+
+async def get_admin_user(user: User = Depends(get_current_user)) -> User:
+    if user.role != "admin":
+        raise HTTPException(status_code=403, detail="Admin access required")
+    return user

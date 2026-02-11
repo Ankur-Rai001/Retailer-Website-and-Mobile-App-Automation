@@ -164,3 +164,8 @@ class ChatSendRequest(BaseModel):
     customer_name: str = "Customer"
     message: str
     sender: str = "customer"
+
+
+class SubscriptionUpdateRequest(BaseModel):
+    subscription_status: str
+    subscription_tier: str
