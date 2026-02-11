@@ -150,3 +150,29 @@ async def logout(request: Request, response: Response, user: User = Depends(get_
         await db.user_sessions.delete_many({"session_token": session_token})
     response.delete_cookie("session_token", path="/", samesite="none", secure=True)
     return {"message": "Logged out successfully"}
+
+
+@router.post("/demo-login")
+async def demo_login(response: Response):
+    """Quick demo login - creates session cookie for demo retailer."""
+    token = "demo_session_retailer_12345678901234567890"
+    account = DEMO_ACCOUNTS[token]
+
+    # Ensure demo data exists
+    await seed_demo_accounts()
+
+    response.set_cookie(
+        key="session_token",
+        value=token,
+        httponly=True,
+        secure=True,
+        samesite="none",
+        path="/",
+        max_age=365 * 24 * 60 * 60
+    )
+
+    user = await db.users.find_one({"user_id": account["user_id"]}, {"_id": 0})
+    if isinstance(user.get('created_at'), str):
+        user['created_at'] = datetime.fromisoformat(user['created_at'])
+
+    return User(**user)
