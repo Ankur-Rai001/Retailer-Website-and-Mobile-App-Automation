@@ -4,7 +4,7 @@ import os
 import logging
 
 from database import db, client
-from routers import auth, store, products, orders, templates, analytics, mobile_app, ondc, chat, public
+from routers import auth, store, products, orders, templates, analytics, mobile_app, ondc, chat, public, admin
 
 logging.basicConfig(
     level=logging.INFO,
@@ -38,6 +38,7 @@ api_router.include_router(mobile_app.router)
 api_router.include_router(ondc.router)
 api_router.include_router(chat.router)
 api_router.include_router(public.router)
+api_router.include_router(admin.router)
 
 
 @api_router.get("/")
