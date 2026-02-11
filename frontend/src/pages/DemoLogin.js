@@ -36,9 +36,8 @@ export default function DemoLogin() {
     const account = DEMO_ACCOUNTS[accountType];
 
     try {
-      // Use dedicated demo login endpoint
       const response = await axios.post(
-        `${API}/auth/demo-login`,
+        `${API}/auth/demo-login?role=${accountType}`,
         {},
         { withCredentials: true }
       );
@@ -46,7 +45,7 @@ export default function DemoLogin() {
       localStorage.setItem('demo_session_token', account.token);
       
       toast.success(`Welcome, ${response.data.name}!`);
-      navigate('/dashboard');
+      navigate(accountType === 'admin' ? '/admin' : '/dashboard');
     } catch (error) {
       console.error('Demo login error:', error);
       toast.error('Demo login failed. Please try again.');
