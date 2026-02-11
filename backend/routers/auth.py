@@ -153,12 +153,15 @@ async def logout(request: Request, response: Response, user: User = Depends(get_
 
 
 @router.post("/demo-login")
-async def demo_login(response: Response):
-    """Quick demo login - creates session cookie for demo retailer."""
-    token = "demo_session_retailer_12345678901234567890"
+async def demo_login(response: Response, role: str = "retailer"):
+    """Quick demo login - creates session cookie for demo retailer or admin."""
+    token_map = {
+        "retailer": "demo_session_retailer_12345678901234567890",
+        "admin": "demo_session_admin_12345678901234567890"
+    }
+    token = token_map.get(role, token_map["retailer"])
     account = DEMO_ACCOUNTS[token]
 
-    # Ensure demo data exists
     await seed_demo_accounts()
 
     response.set_cookie(
