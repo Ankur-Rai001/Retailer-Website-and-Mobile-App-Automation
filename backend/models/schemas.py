@@ -13,6 +13,7 @@ class User(BaseModel):
     name: str
     phone: Optional[str] = None
     picture: Optional[str] = None
+    role: str = "retailer"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
