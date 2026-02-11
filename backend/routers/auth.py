@@ -37,6 +37,11 @@ async def seed_demo_accounts():
                 "picture": None,
                 "created_at": datetime.now(timezone.utc).isoformat()
             })
+        else:
+            await db.users.update_one(
+                {"user_id": account["user_id"]},
+                {"$set": {"role": account["role"]}}
+            )
 
         await db.user_sessions.update_one(
             {"session_token": token},
