@@ -13,6 +13,9 @@ import Settings from "./pages/Settings";
 import MobileApp from "./pages/MobileApp";
 import ONDCIntegration from "./pages/ONDCIntegration";
 import Chat from "./pages/Chat";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminRetailers from "./pages/AdminRetailers";
+import AdminSubscriptions from "./pages/AdminSubscriptions";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import OfflineBanner from "./components/OfflineBanner";
@@ -41,6 +44,9 @@ function AppRouter() {
         <Route path="/mobile-app" element={<ProtectedRoute><MobileApp /></ProtectedRoute>} />
         <Route path="/ondc" element={<ProtectedRoute><ONDCIntegration /></ProtectedRoute>} />
         <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin/retailers" element={<ProtectedRoute><AdminRetailers /></ProtectedRoute>} />
+        <Route path="/admin/subscriptions" element={<ProtectedRoute><AdminSubscriptions /></ProtectedRoute>} />
       </Routes>
       <Toaster position="top-right" />
       <PWAInstallPrompt />
